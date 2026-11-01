@@ -1,0 +1,232 @@
+/* Mobile-first: base rules target phones; @media (min-width: 720px) adds the desktop layout at the end. */
+:root {
+  --bg: rgba(16, 18, 22, 0.88);
+  --fg: #e8eaed;
+  --muted: #9aa0a6;
+  --accent: #ffcc33;
+  --border: rgba(255, 255, 255, 0.12);
+  --touch: 44px;            /* minimum comfortable tap target */
+  --top-safe: calc(env(safe-area-inset-top, 0px) + 12px);
+}
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+#viewer { position: absolute; inset: 0; }
+
+/* ---------- Bottom sheet (mobile) / floating panel (desktop) ---------- */
+#panel {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 8; width: auto; max-height: 45dvh;
+  overflow: auto; box-sizing: border-box; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  backdrop-filter: blur(6px);
+}
+#panel-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+#panel h1 { margin: 0; font-size: 16px; min-width: 0; overflow-wrap: anywhere; }
+button.icon {
+  flex: 0 0 auto; width: 36px; height: 36px; padding: 0; line-height: 1; font-size: 18px;
+  background: rgba(255,255,255,0.08); color: var(--fg);
+}
+#panel.collapsed #panel-header { margin-bottom: 0; }
+#panel.collapsed #panel-body { display: none; }
+#panel h2 { margin: 12px 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+#panel section { border-top: 1px solid var(--border); padding-top: 4px; }
+#panel section:first-of-type { border-top: 0; }
+#panel label { display: block; padding: 2px 0; cursor: pointer; }
+#panel input[type=checkbox] { vertical-align: -2px; margin-right: 6px; }
+.row { display: flex; gap: 6px; }
+.row.wrap { flex-wrap: wrap; }
+button {
+  font: inherit; padding: 8px 12px; min-height: var(--touch); border-radius: 8px; border: 1px solid var(--border);
+  background: var(--accent); color: #111; cursor: pointer;
+}
+button.secondary { background: rgba(255,255,255,0.08); color: var(--fg); }
+button.active { background: #ff5252; color: #fff; }
+.muted { color: var(--muted); }
+#billboard-content dl { margin: 0; display: grid; grid-template-columns: 90px 1fr; gap: 2px 8px; }
+#billboard-content dt { color: var(--muted); }
+#billboard-content dd { margin: 0; }
+.views { margin-top: 8px; }
+.bb-photo { margin: 8px 0 0; }
+.bb-photo img { display: block; width: 100%; border-radius: 6px; background: #000; aspect-ratio: 16 / 10; object-fit: cover; }
+.bb-photo figcaption { margin-top: 3px; }
+.creative { display: flex; gap: 6px; margin-top: 8px; }
+.file-btn {
+  display: inline-block; padding: 8px 12px; min-height: var(--touch); box-sizing: border-box; border-radius: 8px; cursor: pointer;
+  background: var(--accent); color: #111; border: 1px solid var(--border);
+}
+.creative-thumb { display: block; width: 100%; max-height: 90px; object-fit: contain; margin-top: 6px; border-radius: 4px; background: #000; }
+.small { font-size: 11px; margin: 6px 0 0; }
+#status { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; font-size: 12px; }
+#status.error { color: #ff8a80; }
+
+/* ---------- Weather chip: under the search bar on phones, top-right on desktop ---------- */
+#weather-widget {
+  position: absolute; top: calc(var(--top-safe) + 56px); right: 8px; z-index: 8;
+  display: block; text-align: left; min-width: 0; max-width: 180px;
+  padding: 8px 10px; border-radius: 10px;
+  background: var(--bg); color: var(--fg); border: 1px solid var(--border);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  backdrop-filter: blur(6px); cursor: pointer;
+}
+#weather-widget:hover { border-color: rgba(255,255,255,0.3); }
+.wx-compact { display: flex; align-items: center; gap: 8px; }
+.wx-emoji { font-size: 26px; line-height: 1; }
+.wx-temp { font-size: 20px; font-weight: 600; line-height: 1.1; }
+.wx-cond { color: var(--muted); font-size: 12px; }
+.wx-aqi { font-size: 12px; margin-top: 2px; display: flex; align-items: center; gap: 5px; }
+.wx-aqi .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; background: #888; }
+.wx-place { display: none; font-size: 12px; margin-top: 6px; color: var(--muted); }
+.wx-place b { color: var(--fg); font-weight: 600; }
+.wx-detail { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+.wx-detail h4 { margin: 6px 0 2px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.wx-detail div { padding: 1px 0; }
+.wx-detail .muted { font-size: 11px; margin-top: 4px; }
+#weather-widget[aria-expanded="true"] .wx-detail { display: block; }
+
+/* ---------- Street View panel: full screen by default (body.sv-main); thumbnail when the map is main ---------- */
+#sv-panel {
+  position: absolute; inset: 0; z-index: 1; background: #000; color: var(--fg);
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+#sv-panel[hidden] { display: none; }
+#sv-stage { position: relative; flex: 1 1 auto; width: 100%; height: auto; }
+#sv-pano { width: 100%; height: 100%; background: #000; }
+#sv-overlay { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+#sv-board {
+  position: absolute; left: 0; top: 0; width: 200px; height: 100px; transform-origin: 0 0;
+  background: rgba(0, 191, 255, 0.45) center / 100% 100% no-repeat; border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.5); box-sizing: border-box; display: none;
+}
+#sv-board.has-creative { background-color: transparent; }
+#sv-board.back { opacity: 0.75; border-style: dashed; }
+#sv-board-label {
+  position: absolute; left: 0; bottom: 100%; font-size: 11px; background: rgba(0,0,0,0.7); color: #fff;
+  padding: 1px 5px; border-radius: 3px; white-space: nowrap;
+}
+#sv-note {
+  display: none; position: absolute; left: 50%; transform: translateX(-50%); bottom: 30px; z-index: 3; max-width: 40%; margin: 0;
+  padding: 5px 12px; border-radius: 8px; background: var(--bg); text-align: center; pointer-events: none;
+}
+
+/* ---------- Place search: full width at top on phones, centred on desktop ---------- */
+#search {
+  position: absolute; top: var(--top-safe); left: 12px; right: 12px; z-index: 7;
+  font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* 16px stops iOS zoom-on-focus */
+}
+#search-input {
+  width: 100%; box-sizing: border-box; padding: 10px 14px; min-height: var(--touch); border-radius: 10px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--fg); font: inherit; outline: none; backdrop-filter: blur(6px);
+}
+#search-input:focus { border-color: var(--accent); }
+#search-input::placeholder { color: var(--muted); }
+#search-list {
+  list-style: none; margin: 6px 0 0; padding: 4px 0; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--fg); backdrop-filter: blur(6px); max-height: 50dvh; overflow: auto;
+}
+#search-list .hdr { padding: 4px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+#search-list li[role=option] { padding: 10px 14px; min-height: var(--touch); box-sizing: border-box; cursor: pointer; display: flex; gap: 10px; align-items: baseline; }
+#search-list .ico { flex: 0 0 auto; width: 16px; font-size: 12px; opacity: .8; }
+#search-list li[role=option]:hover, #search-list li[aria-selected=true] { background: rgba(255,255,255,0.1); }
+#search-list .main { flex: 0 1 auto; max-width: 65%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#search-list .sec { flex: 1 1 0; min-width: 0; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#search-list .empty { padding: 8px 14px; color: var(--muted); }
+
+/* Street View alignment handles */
+.small-btn { padding: 3px 8px; font-size: 12px; min-height: 0; }
+.btn-link { text-decoration: none; display: inline-block; border-radius: 6px; border: 1px solid var(--border); background: rgba(255,255,255,0.08); color: var(--fg); }
+#bb-manage { text-decoration: underline; }
+.sv-handle {
+  position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  background: var(--accent); border: 2px solid #111; box-shadow: 0 0 0 2px rgba(255,255,255,0.7);
+  cursor: grab; pointer-events: auto; display: none; touch-action: none;
+}
+#sv-overlay.aligning .sv-handle { display: block; }
+#sv-overlay.aligning #sv-board { outline: 2px dashed var(--accent); }
+.sv-handle:active { cursor: grabbing; }
+
+/* ---------- Inset thumbnail: whichever view is not main. Phones: top-left under search. Click to swap. ---------- */
+.inset {
+  position: absolute !important; inset: calc(var(--top-safe) + 56px) auto auto 8px !important;
+  width: 120px !important; height: 84px !important; z-index: 9 !important;
+  border: 2px solid #fff !important; border-radius: 10px !important; overflow: hidden !important; box-shadow: 0 1px 6px rgba(0,0,0,.45);
+}
+.inset-cap {
+  display: none; position: absolute; inset: 0; z-index: 10; align-items: flex-end; padding: 6px 8px; box-sizing: border-box;
+  background: linear-gradient(transparent 45%, rgba(0,0,0,.7)); color: #fff; font: 600 12px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  cursor: pointer; user-select: none;
+}
+.inset .inset-cap { display: flex; }
+.inset:hover { border-color: var(--accent) !important; }
+.inset #sv-note, .inset .cesium-viewer-bottom { display: none !important; }
+
+/* ---------- Google Maps style controls, bottom right. Sits above the sheet when it is open. ---------- */
+#g-controls {
+  position: absolute; right: 8px; bottom: calc(env(safe-area-inset-bottom, 0px) + 72px); z-index: 9;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  font: 11px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+body.panel-open #g-controls { bottom: calc(45dvh + 8px); }
+#g-controls .g-btn, #g-controls .g-zoom, #g-controls .g-bar { background: #fff; color: #555; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.35); border: 0; }
+#g-controls button { font: inherit; cursor: pointer; border: 0; background: none; color: #555; padding: 0; border-radius: 0; min-height: 0; }
+#g-controls button:hover { color: #111; }
+.g-btn { width: var(--touch); height: var(--touch); display: flex; align-items: center; justify-content: center; }
+.g-zoom { display: flex; flex-direction: column; }
+.g-zoom button { width: var(--touch); height: var(--touch); font-size: 22px; line-height: 1; }
+.g-zoom button + button { border-top: 1px solid #e3e3e3; }
+.g-bar { display: flex; align-items: center; gap: 4px; padding: 4px; }
+.g-peg { width: var(--touch); height: var(--touch); display: flex; align-items: center; justify-content: center; color: #f4a300 !important; }
+.g-peg.active { background: #fff3d6 !important; border-radius: 6px; }
+.g-tiles { display: flex; gap: 4px; max-width: calc(100vw - 150px); overflow-x: auto; }
+.g-tile {
+  flex: 0 0 auto; width: 52px; height: 48px; border-radius: 6px; background: #f1f3f4 !important; color: #333 !important; text-decoration: none;
+  display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 9px !important; border: 2px solid transparent !important;
+}
+.g-tile:hover { border-color: #1a73e8 !important; background: #e8f0fe !important; }
+.g-tile .g-ico { font-size: 16px; line-height: 1; }
+.g-chev { width: 28px; height: var(--touch); display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+.g-bar.collapsed .g-tiles { display: none; }
+.g-bar.collapsed .g-chev { transform: rotate(180deg); }
+
+/* =====================================================================
+   Desktop (>= 720px): floating panel, centred search, top-right weather,
+   wider inset bottom-left, larger controls.
+   ===================================================================== */
+@media (min-width: 720px) {
+  #panel {
+    top: 12px; left: 12px; right: auto; bottom: auto; width: 300px; max-height: calc(100% - 24px);
+    padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px;
+    font-size: 13px;
+  }
+  #panel-header { margin-bottom: 8px; }
+  #panel.collapsed { width: 300px; }
+  button.icon { width: 26px; height: 26px; font-size: 16px; }
+  button { padding: 6px 10px; min-height: 0; border-radius: 6px; }
+  .file-btn { padding: 6px 10px; min-height: 0; border-radius: 6px; }
+
+  #weather-widget {
+    top: 12px; right: 12px; left: auto; min-width: 150px; max-width: 240px; padding: 10px 12px;
+    font-size: 13px;
+  }
+  .wx-emoji { font-size: 30px; }
+  .wx-temp { font-size: 22px; }
+  .wx-place { display: block; max-width: 220px; }
+
+  #sv-note { display: block; }
+
+  #search { top: 12px; left: 50%; right: auto; transform: translateX(-50%); width: 420px; max-width: calc(100% - 24px); font-size: 14px; }
+  #search-input { padding: 10px 14px; min-height: 0; }
+  #search-list li[role=option] { padding: 7px 14px; min-height: 0; }
+  #search-list { max-height: 320px; }
+
+  .inset { inset: auto auto 36px 12px !important; width: 160px !important; height: 110px !important; }
+
+  #g-controls { right: 12px; bottom: 36px; }
+  body.panel-open #g-controls { bottom: 36px; }
+  .g-btn, .g-peg, .g-zoom button { width: 40px; height: 40px; }
+  .g-chev { height: 40px; }
+  .g-bar { gap: 6px; padding: 6px; }
+  .g-tiles { max-width: none; overflow: visible; gap: 6px; }
+  .g-tile { width: 56px; height: 48px; font-size: 10px !important; }
+  .g-tile .g-ico { font-size: 17px; }
+}

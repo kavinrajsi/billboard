@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chennai 3D Live</title>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.120/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="viewer"><div class="inset-cap" id="map-cap" role="button" tabindex="0" title="Show 3D map full screen">3D map</div></div>
+
+  <aside id="panel">
+    <header id="panel-header">
+      <h1 id="panel-title">Chennai 3D Live</h1>
+      <button id="panel-toggle" type="button" class="icon" aria-expanded="true" aria-controls="panel-body" title="Hide panel">&#x2212;</button>
+    </header>
+    <div id="panel-body">
+
+    <section id="billboard-box" hidden>
+      <div id="billboard-content"></div>
+    </section>
+
+    <footer id="status" class="muted" hidden></footer>
+    </div>
+  </aside>
+
+  <div id="search" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+    <input id="search-input" type="search" placeholder="Search a place in Chennai…" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-controls="search-list">
+    <ul id="search-list" role="listbox" hidden></ul>
+  </div>
+
+  <button id="weather-widget" type="button" hidden aria-expanded="false" title="Click for details">
+    <div class="wx-compact">
+      <img id="wx-icon" alt="" width="40" height="40" hidden>
+      <span id="wx-emoji" class="wx-emoji" hidden></span>
+      <div class="wx-main">
+        <div id="wx-temp" class="wx-temp">–</div>
+        <div id="wx-cond" class="wx-cond">Loading…</div>
+        <div id="wx-aqi" class="wx-aqi"></div>
+      </div>
+    </div>
+    <div id="wx-place" class="wx-place"></div>
+    <div id="wx-detail" class="wx-detail"></div>
+  </button>
+
+  <div id="sv-panel" hidden>
+    <div id="sv-stage">
+      <div id="sv-pano"></div>
+      <div id="sv-overlay">
+        <div id="sv-board"><span id="sv-board-label"></span></div>
+      </div>
+    </div>
+    <div id="sv-note" class="muted small"></div>
+    <div class="inset-cap" id="sv-cap" role="button" tabindex="0" title="Show Street View full screen">Street View</div>
+  </div>
+
+  <!-- Google Maps style controls, bottom right -->
+  <div id="g-controls">
+    <button id="g-locate" type="button" class="g-btn" title="Centre on this billboard" aria-label="Centre on this billboard">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A8.99 8.99 0 0 0 13 3.06V1h-2v2.06A8.99 8.99 0 0 0 3.06 11H1v2h2.06A8.99 8.99 0 0 0 11 20.94V23h2v-2.06A8.99 8.99 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg>
+    </button>
+    <div class="g-zoom">
+      <button id="g-zoom-in" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+      <button id="g-zoom-out" type="button" title="Zoom out" aria-label="Zoom out">&minus;</button>
+    </div>
+    <div id="g-bar" class="g-bar">
+      <button id="g-peg" type="button" class="g-peg" title="Switch between Street View and 3D map" aria-label="Switch between Street View and 3D map">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><circle cx="12" cy="4" r="2.6" fill="currentColor"/><path fill="currentColor" d="M9.2 8h5.6c1 0 1.7.8 1.7 1.7V15h-1.6v7h-1.8v-5h-1.2v5H10v-7H8.4V9.7C8.4 8.8 9.1 8 9.2 8z"/></svg>
+      </button>
+      <div class="g-tiles">
+        <button type="button" class="g-tile" data-view="driver" title="Driver's eye view of the board"><span class="g-ico">&#x1F697;</span><span>Driver</span></button>
+        <button type="button" class="g-tile" data-view="drive" title="Drive toward the board"><span class="g-ico">&#x25B6;</span><span>Drive in</span></button>
+        <button type="button" class="g-tile" data-view="flip" title="Drive the other direction"><span class="g-ico">&#x21C4;</span><span>Other way</span></button>
+        <button type="button" class="g-tile" data-view="overview" title="Overview of the board in 3D"><span class="g-ico">&#x1F6F0;</span><span>Overview</span></button>
+        <a class="g-tile" id="g-admin" href="/admin.html" title="Upload creatives and align boards"><span class="g-ico">&#x270E;</span><span>Panel</span></a>
+      </div>
+      <button id="g-collapse" type="button" class="g-chev" title="Collapse" aria-label="Collapse" aria-expanded="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7.4 15.4 12 10.8l4.6 4.6L18 14l-6-6-6 6zM7.4 20.4 12 15.8l4.6 4.6L18 19l-6-6-6 6z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+{
+  "type": "FeatureCollection",
+  "name": "chennai_billboards",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.235644,
+          13.037378
+        ]
+      },
+      "properties": {
+        "id": "SKY-91",
+        "name": "T.Nagar VN Road, Natesan Park opp",
+        "area": "T.Nagar",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 4.7,
+        "board_height_m": 3.1,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 6.3,
+        "heading_deg": 122.8,
+        "daily_footfall": 90000,
+        "traffic_hours": "8:00–10:00 AM & 5:00–8:00 PM (commuter rush); 11:00 AM–1:00 PM (shoppers)",
+        "landmark": "Natesan Park, VN Road, T.Nagar",
+        "audience_profile": {
+          "Residents": 30,
+          "Daily Commuters": 25,
+          "Shoppers": 20,
+          "Office-Goers": 15,
+          "Families": 10
+        },
+        "why_this_location": "Commercial Hub / Arterial Road / Mixed Commuter Audience",
+        "map_link": "https://l1nk.dev/ijxxc4v",
+        "position_source": "Google Maps place: Dr. Natesan Park, T. Nagar (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano R8FAzj088TNAWGUgbDRCjw (2026-10-31)",
+        "creative_url": "/creatives/SKY-91.png?v=1793458169166",
+        "sv_alignments": {
+          "6NLuhYiNjfeCVe8CqJ6K4Q": {
+            "corners": [
+              {
+                "heading": 314.591,
+                "pitch": 9.151
+              },
+              {
+                "heading": 320.626,
+                "pitch": 8.683
+              },
+              {
+                "heading": 320.462,
+                "pitch": 5.007
+              },
+              {
+                "heading": 314.422,
+                "pitch": 5.278
+              }
+            ],
+            "lat": 13.0370804,
+            "lng": 80.2359252
+          },
+          "R8FAzj088TNAWGUgbDRCjw": {
+            "corners": [
+              {
+                "heading": 290.391,
+                "pitch": 22.479
+              },
+              {
+                "heading": 306.754,
+                "pitch": 23.044
+              },
+              {
+                "heading": 306.671,
+                "pitch": 12.906
+              },
+              {
+                "heading": 290.545,
+                "pitch": 12.955
+              }
+            ],
+            "lat": 13.0373085,
+            "lng": 80.2357745
+          }
+        },
+        "sv_pano_id": "6NLuhYiNjfeCVe8CqJ6K4Q"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.259373,
+          13.015983
+        ]
+      },
+      "properties": {
+        "id": "SKY-02",
+        "name": "Adyar Opp. Dr.MGR Janaki College Towards Mylapore",
+        "area": "Adyar",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 4.7,
+        "board_height_m": 2.8,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 5.9,
+        "heading_deg": 190.4,
+        "daily_footfall": 140000,
+        "traffic_hours": "8:00–10:00 AM & 4:00–7:00 PM (college + office rush); 12:00–2:00 PM (lunch movement)",
+        "landmark": "Dr. MGR Janaki College of Arts & Science",
+        "audience_profile": {
+          "College Students": 35,
+          "Daily Commuters": 25,
+          "Families": 20,
+          "IT Professionals": 15,
+          "Faculty & Staff": 5
+        },
+        "why_this_location": "Educational Zone / Arterial Road / High Footfall Zone",
+        "map_link": "https://l1nk.dev/ijxxc4v",
+        "position_source": "Google Maps place: Dr. MGR Janaki College, Raja Annamalaipuram (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano q0HLVPlXZRcAvPuHrH_4jg (2026-10-31)",
+        "creative_url": "/creatives/SKY-02.png?v=1793458169221",
+        "sv_alignments": {
+          "i_uPpV-R8zqCAQG1_84JSg": {
+            "corners": [
+              {
+                "heading": 6.302,
+                "pitch": 11.64
+              },
+              {
+                "heading": 15.343,
+                "pitch": 11.697
+              },
+              {
+                "heading": 15.211,
+                "pitch": 6.678
+              },
+              {
+                "heading": 6.34,
+                "pitch": 6.569
+              }
+            ],
+            "lat": 13.0157154,
+            "lng": 80.2593229
+          },
+          "q0HLVPlXZRcAvPuHrH_4jg": {
+            "corners": [
+              {
+                "heading": 0.449,
+                "pitch": 17.404
+              },
+              {
+                "heading": 14.43,
+                "pitch": 17.701
+              },
+              {
+                "heading": 14.366,
+                "pitch": 9.716
+              },
+              {
+                "heading": 0.698,
+                "pitch": 9.553
+              }
+            ],
+            "lat": 13.0158121,
+            "lng": 80.2593486
+          }
+        },
+        "sv_pano_id": "i_uPpV-R8zqCAQG1_84JSg"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.271226,
+          13.000679
+        ]
+      },
+      "properties": {
+        "id": "SKY-13",
+        "name": "Besant Nagar Beach Towards Adayar",
+        "area": "Besant Nagar",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 5.4,
+        "board_height_m": 3.1,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 7.2,
+        "heading_deg": 188,
+        "daily_footfall": 80000,
+        "traffic_hours": "6:00–9:00 AM (morning walkers); 5:00–9:00 PM (evening leisure crowd); All-day weekends",
+        "landmark": "Besant Nagar Beach (Elliot's Beach)",
+        "audience_profile": {
+          "Affluent Families": 30,
+          "Fitness Enthusiasts": 25,
+          "Young Professionals": 20,
+          "Students": 15,
+          "Tourists": 10
+        },
+        "why_this_location": "Beach Frontage / Leisure Zone / Premium Residential Audience",
+        "map_link": "https://l1nk.dev/ijxxc4v",
+        "position_source": "Google Maps place: Edward Elliot's Beach (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano 7gG_NEOQqryRorG4jh5QVg (2026-10-31)",
+        "creative_url": "/creatives/SKY-13.png?v=1793458169281",
+        "sv_alignments": {
+          "7gG_NEOQqryRorG4jh5QVg": {
+            "corners": [
+              {
+                "heading": 33.234,
+                "pitch": 14.033
+              },
+              {
+                "heading": 41.948,
+                "pitch": 13.011
+              },
+              {
+                "heading": 41.483,
+                "pitch": 7.775
+              },
+              {
+                "heading": 33.007,
+                "pitch": 8.404
+              }
+            ],
+            "lat": 13.0004462,
+            "lng": 80.2710764
+          },
+          "lNoYWSktYG9jVwjY0wHwQQ": {
+            "corners": [
+              {
+                "heading": 22.604,
+                "pitch": 8.94
+              },
+              {
+                "heading": 28.344,
+                "pitch": 8.677
+              },
+              {
+                "heading": 28.28,
+                "pitch": 5.448
+              },
+              {
+                "heading": 22.556,
+                "pitch": 5.506
+              }
+            ],
+            "lat": 13.0002718,
+            "lng": 80.2710271
+          },
+          "k4VVrBU9xY9zQjUdMkotXA": {
+            "corners": [
+              {
+                "heading": 26.681,
+                "pitch": 11.059
+              },
+              {
+                "heading": 33.569,
+                "pitch": 10.46
+              },
+              {
+                "heading": 33.467,
+                "pitch": 6.36
+              },
+              {
+                "heading": 26.704,
+                "pitch": 6.765
+              }
+            ],
+            "lat": 13.0003624,
+            "lng": 80.2710366
+          }
+        },
+        "sv_pano_id": "7gG_NEOQqryRorG4jh5QVg"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.28106,
+          13.048862
+        ]
+      },
+      "properties": {
+        "id": "SKY-38",
+        "name": "Inside Beach Road opp V House towards Santhome",
+        "area": "Marina Beach",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 4,
+        "board_height_m": 2.7,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 5.8,
+        "heading_deg": 19,
+        "daily_footfall": 50000,
+        "traffic_hours": "6:00–9:30 AM (walkers); 4:30–8:30 PM (evening leisure); Weekends all day",
+        "landmark": "V House (Vivekananda House), Marina Beach",
+        "audience_profile": {
+          "Cultural Tourists": 30,
+          "Families": 25,
+          "Morning Fitness Crowd": 20,
+          "Santhome Residents": 15,
+          "Students": 10
+        },
+        "why_this_location": "Seafront Arterial / Cultural Zone / Leisure Audience",
+        "map_link": "https://acesse.one/4yt4wfv",
+        "position_source": "Google Maps place: Vivekananda House, Marina Beach Road (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano DWrfrVhVYwR7NMgl-lO14g (2026-10-31)",
+        "creative_url": "/creatives/SKY-38.png?v=1793458169350",
+        "sv_alignments": {
+          "W4R203NjxTygmzEgcwul3g": {
+            "corners": [
+              {
+                "heading": 189.274,
+                "pitch": 7.211
+              },
+              {
+                "heading": 194.25,
+                "pitch": 7.318
+              },
+              {
+                "heading": 194.295,
+                "pitch": 4.212
+              },
+              {
+                "heading": 189.386,
+                "pitch": 4.056
+              }
+            ],
+            "lat": 13.0493226,
+            "lng": 80.2811949
+          },
+          "fLJeNN5dseg2c2eQYkb7AQ": {
+            "corners": [
+              {
+                "heading": 194.757,
+                "pitch": 15.499
+              },
+              {
+                "heading": 205.484,
+                "pitch": 15.448
+              },
+              {
+                "heading": 205.352,
+                "pitch": 8.82
+              },
+              {
+                "heading": 194.767,
+                "pitch": 8.949
+              }
+            ],
+            "lat": 13.0490544,
+            "lng": 80.2811287
+          },
+          "DWrfrVhVYwR7NMgl-lO14g": {
+            "corners": [
+              {
+                "heading": 198.665,
+                "pitch": 24.091
+              },
+              {
+                "heading": 215.39,
+                "pitch": 22.679
+              },
+              {
+                "heading": 214.846,
+                "pitch": 13.33
+              },
+              {
+                "heading": 198.778,
+                "pitch": 13.724
+              }
+            ],
+            "lat": 13.0489679,
+            "lng": 80.2811143
+          }
+        },
+        "sv_pano_id": "W4R203NjxTygmzEgcwul3g"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.263842,
+          13.03741
+        ]
+      },
+      "properties": {
+        "id": "SKY-45",
+        "name": "Mylapore, Nageswara Rao park towards Alwarpet",
+        "area": "Mylapore",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 8,
+        "board_height_m": 4.7,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 8.5,
+        "heading_deg": 32.4,
+        "daily_footfall": 65000,
+        "traffic_hours": "6:30–9:30 AM (temple & park visitors); 5:00–8:00 PM (evening); 10:00 AM–12:00 PM (mid-morning)",
+        "landmark": "Nageswara Rao Park, Luz Church Road, Mylapore",
+        "audience_profile": {
+          "Affluent Residents": 30,
+          "Devotees": 25,
+          "Cultural Tourists": 20,
+          "Professionals": 15,
+          "Upscale Shoppers": 10
+        },
+        "why_this_location": "Cultural & Religious Hub / Premium Residential / High Footfall Zone",
+        "map_link": "https://acesse.one/4yt4wfv",
+        "position_source": "Google Maps place: Nageswara Rao Park, Mylapore (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano JbUV4H217bsDxLw4yn3JHA (2026-10-31)",
+        "creative_url": "/creatives/SKY-45.png?v=1793458169414",
+        "sv_alignments": {
+          "VNQUkLX3FTu11fChroXNyQ": {
+            "corners": [
+              {
+                "heading": 229.879,
+                "pitch": 9.528
+              },
+              {
+                "heading": 236.711,
+                "pitch": 9.511
+              },
+              {
+                "heading": 236.65,
+                "pitch": 5.479
+              },
+              {
+                "heading": 229.8,
+                "pitch": 5.575
+              }
+            ],
+            "lat": 13.0376812,
+            "lng": 80.2642351
+          },
+          "HPyNwMjZ02jEYjFYPekajA": {
+            "corners": [
+              {
+                "heading": 214.16,
+                "pitch": 13.443
+              },
+              {
+                "heading": 224.43,
+                "pitch": 13.538
+              },
+              {
+                "heading": 224.449,
+                "pitch": 7.658
+              },
+              {
+                "heading": 214.307,
+                "pitch": 7.682
+              }
+            ],
+            "lat": 13.0377036,
+            "lng": 80.2640756
+          },
+          "JbUV4H217bsDxLw4yn3JHA": {
+            "corners": [
+              {
+                "heading": 204.084,
+                "pitch": 20.085
+              },
+              {
+                "heading": 220.139,
+                "pitch": 21.063
+              },
+              {
+                "heading": 220.076,
+                "pitch": 12.064
+              },
+              {
+                "heading": 204.506,
+                "pitch": 11.312
+              }
+            ],
+            "lat": 13.0376466,
+            "lng": 80.2639993
+          }
+        },
+        "sv_pano_id": "VNQUkLX3FTu11fChroXNyQ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22684989999999,
+          13.0132821
+        ]
+      },
+      "properties": {
+        "id": "SKY-80",
+        "name": "Saidapet Near Saidapet Court Towards Adyar",
+        "area": "Saidapet",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 1.83,
+        "board_height_m": 0.91,
+        "size_ft": "6 × 3",
+        "pixel_resolution": "1280 x 640",
+        "base_height_m": 5,
+        "heading_deg": 0,
+        "daily_footfall": 150000,
+        "traffic_hours": "8:30–10:30 AM & 4:30–7:30 PM (commute); 10:00 AM–12:00 PM (court activity)",
+        "landmark": "Saidapet District Court",
+        "audience_profile": {
+          "Daily Commuters": 30,
+          "Government Employees": 25,
+          "Legal Professionals": 20,
+          "Residents": 15,
+          "Shoppers": 10
+        },
+        "why_this_location": "Civic & Legal Hub / Arterial Junction / South Chennai Commuters",
+        "map_link": "https://acesse.one/ye54pqk",
+        "position_source": "Google Maps place: Metropolitan Magistrate Courts, Saidapet (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "estimated: base height 5 m and heading 0° are placeholders; align on Street View to fit",
+        "size_note": "PDF gives one size value only; width 6 ft as printed, height derived from 1280 x 640 (2:1)",
+        "creative_url": "/creatives/SKY-80.png?v=1793458169670"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.259416,
+          12.9773017
+        ]
+      },
+      "properties": {
+        "id": "SKY-86",
+        "name": "Thiruvanmiyur RTO Office infront of West side shopping mall",
+        "area": "Thiruvanmiyur",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 5,
+        "board_height_m": 2.41,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 5,
+        "heading_deg": 0,
+        "daily_footfall": 120000,
+        "traffic_hours": "9:00–11:00 AM (RTO activity); 5:00–8:00 PM (evening shopping & commute); 10 AM–8 PM weekends",
+        "landmark": "Thiruvanmiyur RTO Office / West Side Shopping Centre",
+        "audience_profile": {
+          "IT Professionals": 30,
+          "South Chennai Residents": 25,
+          "ECR Leisure Seekers": 25,
+          "Motorists & Shoppers": 20
+        },
+        "why_this_location": "Coastal Junction / ECR Gateway / IT + Leisure Mixed Audience",
+        "map_link": "https://acesse.one/33wt9fq",
+        "position_source": "Google Maps place: RTO Thiruvanmiyur (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "estimated: base height 5 m and heading 0° are placeholders; align on Street View to fit",
+        "creative_url": "/creatives/SKY-86.png?v=1793458169453"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.217648,
+          12.983653
+        ]
+      },
+      "properties": {
+        "id": "SKY-98",
+        "name": "Velachery 200ft rd, Kalyan jewellery towards Phoenix mall",
+        "area": "Velachery",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 5,
+        "board_height_m": 2,
+        "size_ft": "16.4 × 7.9",
+        "pixel_resolution": "1600 x 768",
+        "base_height_m": 2,
+        "heading_deg": 92.3,
+        "daily_footfall": 120000,
+        "traffic_hours": "11:00 AM–9:00 PM (mall hours peak); 5:30–8:30 PM (post-work shoppers); Weekends all day",
+        "landmark": "Kalyan Jewellers / Velachery 200ft Road",
+        "audience_profile": {
+          "Affluent Shoppers": 35,
+          "IT Professionals": 30,
+          "Families": 20,
+          "Young Professionals": 15
+        },
+        "why_this_location": "Premier Retail Corridor / Mall Frontage / Affluent Shopper Audience",
+        "map_link": "https://acesse.one/33wt9fq",
+        "position_source": "Google Maps place: Kalyan Jewellers - Velachery (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "fitted from Street View alignment on pano CAoSF0NJSE0wb2dLRUlDQWdJRG0zY3lrLXdF (2026-10-31)",
+        "sv_alignments": {
+          "CAoSF0NJSE0wb2dLRUlDQWdJRG0zY3lrLXdF": {
+            "corners": [
+              {
+                "heading": 263.347,
+                "pitch": 3.712
+              },
+              {
+                "heading": 281.376,
+                "pitch": 6.961
+              },
+              {
+                "heading": 281.195,
+                "pitch": -0.327
+              },
+              {
+                "heading": 263.461,
+                "pitch": -3.357
+              }
+            ],
+            "lat": 12.9836472,
+            "lng": 80.2177944
+          }
+        },
+        "sv_pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRG0zY3lrLXdF",
+        "creative_url": "/creatives/SKY-98.png?v=1793458169578"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2147026,
+          13.0864341
+        ]
+      },
+      "properties": {
+        "id": "SKY-83",
+        "name": "Anna Nagar Tower Park Entrance",
+        "area": "Anna Nagar",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 2.74,
+        "board_height_m": 1.37,
+        "size_ft": "9 × 4.5",
+        "pixel_resolution": "1280 x 640",
+        "base_height_m": 5,
+        "heading_deg": 0,
+        "daily_footfall": 50000,
+        "traffic_hours": "6:30–9:30 AM (morning park visitors & commuters); 5:00–8:30 PM (evening crowd); 10 AM–8 PM weekends",
+        "landmark": "Anna Nagar Tower (MMDA Tower Park)",
+        "audience_profile": {
+          "Affluent Families": 30,
+          "HNIs": 20,
+          "Young Professionals": 20,
+          "Senior Residents": 20,
+          "Tourists": 10
+        },
+        "why_this_location": "Premium Planned Township / Iconic Landmark / Affluent Residential Audience",
+        "map_link": "https://l1nk.dev/lwbd3fe",
+        "position_source": "Google Maps place: Tower Park, Anna Nagar (area point) (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "estimated: base height 5 m and heading 0° are placeholders; align on Street View to fit",
+        "size_note": "PDF gives one size value only; width 9 ft as printed, height derived from 1280 x 640 (2:1)",
+        "creative_url": "/creatives/SKY-83.png?v=1793458169740"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2640168,
+          13.0585752
+        ]
+      },
+      "properties": {
+        "id": "SKY-35",
+        "name": "Royapettah Express Avenue Mall Opposite",
+        "area": "Royapettah",
+        "owner": "SkyRams",
+        "type": "Digital LED screen",
+        "source": "Digital Screens.pdf (SkyRams)",
+        "width_m": 4.05,
+        "board_height_m": 2.01,
+        "size_ft": "13.3 × 6.6",
+        "pixel_resolution": "1280 x 640",
+        "base_height_m": 5,
+        "heading_deg": 0,
+        "daily_footfall": 120000,
+        "traffic_hours": "11:00 AM–9:00 PM (mall hours); 5:30–8:30 PM (after-work shoppers); All day weekends",
+        "landmark": "Express Avenue Mall, Royapettah",
+        "audience_profile": {
+          "Affluent Shoppers": 35,
+          "Young Professionals": 25,
+          "Tourists": 20,
+          "Fashion-Conscious Youth": 15,
+          "Residents": 5
+        },
+        "why_this_location": "Premium Mall Frontage / Central Chennai / Affluent Shopper + Tourist Audience",
+        "map_link": "https://acesse.one/sn1f6tc",
+        "position_source": "Google Maps place: Express Avenue Mall, Royapettah (lat/lng from Places API; pin is the place, not the exact board)",
+        "geometry_source": "estimated: base height 5 m and heading 0° are placeholders; align on Street View to fit",
+        "creative_url": "/creatives/SKY-35.png?v=1793458169865"
+      }
+    }
+  ]
+}
