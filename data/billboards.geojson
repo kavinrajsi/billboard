@@ -503,8 +503,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          80.22684989999999,
-          13.0132821
+          80.226115,
+          13.015034
         ]
       },
       "properties": {
@@ -514,12 +514,12 @@
         "owner": "SkyRams",
         "type": "Digital LED screen",
         "source": "Digital Screens.pdf (SkyRams)",
-        "width_m": 1.83,
-        "board_height_m": 0.91,
+        "width_m": 1.8,
+        "board_height_m": 1.4,
         "size_ft": "6 × 3",
         "pixel_resolution": "1280 x 640",
-        "base_height_m": 5,
-        "heading_deg": 0,
+        "base_height_m": 3.2,
+        "heading_deg": 300.8,
         "daily_footfall": 150000,
         "traffic_hours": "8:30–10:30 AM & 4:30–7:30 PM (commute); 10:00 AM–12:00 PM (court activity)",
         "landmark": "Saidapet District Court",
@@ -533,9 +533,34 @@
         "why_this_location": "Civic & Legal Hub / Arterial Junction / South Chennai Commuters",
         "map_link": "https://acesse.one/ye54pqk",
         "position_source": "Google Maps place: Metropolitan Magistrate Courts, Saidapet (lat/lng from Places API; pin is the place, not the exact board)",
-        "geometry_source": "estimated: base height 5 m and heading 0° are placeholders; align on Street View to fit",
+        "geometry_source": "fitted from Street View alignment on pano uhXeAhL7cbygokmGgcSkSg (2026-11-01)",
         "size_note": "PDF gives one size value only; width 6 ft as printed, height derived from 1280 x 640 (2:1)",
-        "creative_url": "/creatives/SKY-80.png?v=1793458169670"
+        "creative_url": "/creatives/SKY-80.png?v=1793458169670",
+        "sv_pano_id": "uhXeAhL7cbygokmGgcSkSg",
+        "sv_alignments": {
+          "uhXeAhL7cbygokmGgcSkSg": {
+            "corners": [
+              {
+                "heading": 137.237,
+                "pitch": 9.898
+              },
+              {
+                "heading": 143.169,
+                "pitch": 10.533
+              },
+              {
+                "heading": 143.071,
+                "pitch": 6.135
+              },
+              {
+                "heading": 137.327,
+                "pitch": 5.684
+              }
+            ],
+            "lat": 13.0151173,
+            "lng": 80.2259727
+          }
+        }
       }
     },
     {
