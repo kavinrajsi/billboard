@@ -2,6 +2,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFile, writeFile, unlink, mkdir, copyFile, readdir } from "node:fs/promises";
+import * as config from "./config.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const BILLBOARDS_FILE = path.join(ROOT, "data", "billboards.geojson");
@@ -9,6 +10,14 @@ const CREATIVES_DIR = path.join(ROOT, "data", "creatives");
 const MIME = { png: "image/png", jpg: "image/jpeg", webp: "image/webp", gif: "image/gif" };
 
 export const usingDb = !!process.env.DATABASE_URL;
+
+const LAYERS = ["metro-blue-line"];
+const defaultSettings = () => ({
+  corridors: config.CORRIDORS,
+  air_points: config.AIR_POINTS,
+  weather_point: config.WEATHER_POINT,
+  cache_ttl: config.CACHE_TTL,
+});
 
 // ---------- Postgres (Neon) ----------
 let sql = null;
@@ -38,6 +47,24 @@ function ensureSchema() {
       data_b64 text NOT NULL,
       updated_at timestamptz NOT NULL DEFAULT now()
     )`;
+    await q`CREATE TABLE IF NOT EXISTS settings (
+      key text PRIMARY KEY,
+      value jsonb NOT NULL,
+      updated_at timestamptz NOT NULL DEFAULT now()
+    )`;
+    await q`CREATE TABLE IF NOT EXISTS layers (
+      name text PRIMARY KEY,
+      geojson jsonb NOT NULL,
+      updated_at timestamptz NOT NULL DEFAULT now()
+    )`;
+    // seed settings and layers independently (each only when its row is missing)
+    for (const [key, value] of Object.entries(defaultSettings())) {
+      await q`INSERT INTO settings (key, value) VALUES (${key}, ${JSON.stringify(value)}::jsonb) ON CONFLICT (key) DO NOTHING`;
+    }
+    for (const name of LAYERS) {
+      const txt = await readFile(path.join(ROOT, "data", `${name}.geojson`), "utf8").catch(() => null);
+      if (txt) await q`INSERT INTO layers (name, geojson) VALUES (${name}, ${txt}::jsonb) ON CONFLICT (name) DO NOTHING`;
+    }
     const [{ n }] = await q`SELECT count(*)::int AS n FROM billboards`;
     if (n === 0) {
       const geo = JSON.parse(await readFile(BILLBOARDS_FILE, "utf8"));
@@ -113,4 +140,28 @@ export async function deleteCreative(name) {
   await ensureSchema();
   const q = await getSql();
   await q`DELETE FROM creatives WHERE name = ${name}`;
+}
+
+// ---------- settings (corridors, air points, weather point, cache TTLs) ----------
+// Stored in Neon so they can be changed without a deploy; server/config.js is the seed and the no-DB fallback.
+let settingsCache = null;
+export async function getSettings() {
+  if (!usingDb) return defaultSettings();
+  if (settingsCache && settingsCache.expires > Date.now()) return settingsCache.value;
+  await ensureSchema();
+  const q = await getSql();
+  const rows = await q`SELECT key, value FROM settings`;
+  const value = { ...defaultSettings(), ...Object.fromEntries(rows.map((r) => [r.key, r.value])) };
+  settingsCache = { value, expires: Date.now() + 60_000 };
+  return value;
+}
+
+// ---------- static map layers (e.g. metro line) ----------
+export async function getLayer(name) {
+  if (!LAYERS.includes(name)) return null;
+  if (!usingDb) return JSON.parse(await readFile(path.join(ROOT, "data", `${name}.geojson`), "utf8"));
+  await ensureSchema();
+  const q = await getSql();
+  const [r] = await q`SELECT geojson FROM layers WHERE name = ${name}`;
+  return r ? r.geojson : null;
 }

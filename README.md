@@ -87,12 +87,12 @@ An open viewer tab reloads the data as soon as the panel saves.
 |------|---------|
 | `server/index.js` | Express app: API routes, uploads, static files |
 | `server/store.js` | Storage layer: Neon Postgres, or files in `data/` when `DATABASE_URL` is unset |
-| `server/config.js` | Traffic corridors, air-quality points, weather point, cache TTLs |
+| `server/config.js` | Default traffic corridors, air-quality points, weather point, cache TTLs (seed for the `settings` table, and the fallback without a DB) |
 | `public/index.html`, `app.js`, `style.css` | Viewer |
 | `public/admin.html`, `admin.js`, `admin.css` | Billboard panel |
 | `public/sv-math.js` | Street View geometry: camera model, projection, alignment fits |
 | `data/billboards.geojson` | Seed data. Copied into Neon the first time the database is empty |
-| `data/metro-blue-line.geojson` | Metro Blue Line route |
+| `data/metro-blue-line.geojson` | Metro Blue Line route (seed for the `layers` table) |
 | `data/creatives/` | Seed creative images (then stored in Neon, served at `/creatives/`) |
 
 ## API routes
@@ -123,8 +123,10 @@ Tables are created automatically on first request:
 |-------|-------|
 | `billboards` | One row per board: `id`, `position`, `feature` (the GeoJSON feature as JSONB) |
 | `creatives` | Creative images as base64: `name`, `content_type`, `data_b64` |
+| `settings` | Keys `corridors`, `air_points`, `weather_point`, `cache_ttl` (JSONB). Edit in the Neon console to change them without a deploy. Cached 60 s |
+| `layers` | Static map layers as GeoJSON, e.g. `metro-blue-line` |
 
-The first run seeds both tables from `data/`. After that the database is the source of truth, so panel saves persist on Vercel.
+The first run seeds the tables from `data/` and `server/config.js`. After that the database is the source of truth, so panel saves persist on Vercel.
 
 > The write routes (`PUT`, `POST`, `DELETE`) have **no login**. Run the panel locally
 > or put the server behind authentication before exposing it on the internet.
@@ -150,9 +152,9 @@ Ground elevation is sampled from the mesh when the page loads.
 
 ## Customising
 
-- **Add a traffic corridor, air point or weather point:** edit `server/config.js`.
+- **Add a traffic corridor, air point or weather point:** update the matching row in the `settings` table (or `server/config.js` before the first seed).
   Each corridor costs one billable Routes request per cache refresh.
-- **Change cache times:** `CACHE_TTL` in `server/config.js`.
+- **Change cache times:** the `cache_ttl` row in `settings`.
 - **Add a live layer:** add a route in `server/index.js`, then `defineLayer(...)` in `public/app.js`.
 
 ## Accuracy and terms

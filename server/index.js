@@ -1,9 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { readFile } from "node:fs/promises";
 import * as store from "./store.js";
-import { CORRIDORS, AIR_POINTS, WEATHER_POINT, CACHE_TTL } from "./config.js";
 import * as M from "../public/sv-math.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -138,7 +136,8 @@ app.get("/config.js", (_req, res) => {
 
 app.get("/api/traffic", async (_req, res) => {
   try {
-    const data = await cached("traffic", CACHE_TTL.traffic, async () => {
+    const { corridors: CORRIDORS, cache_ttl } = await store.getSettings();
+    const data = await cached("traffic", cache_ttl.traffic, async () => {
       const results = await Promise.allSettled(CORRIDORS.map(fetchCorridor));
       if (results.every((r) => r.status === "rejected")) throw results[0].reason;
       return {
@@ -156,7 +155,8 @@ app.get("/api/traffic", async (_req, res) => {
 
 app.get("/api/air", async (_req, res) => {
   try {
-    const data = await cached("air", CACHE_TTL.air, async () => {
+    const { air_points: AIR_POINTS, cache_ttl } = await store.getSettings();
+    const data = await cached("air", cache_ttl.air, async () => {
       const results = await Promise.allSettled(AIR_POINTS.map(fetchAir));
       if (results.every((r) => r.status === "rejected")) throw results[0].reason;
       return {
@@ -183,8 +183,9 @@ function pointFromQuery(q, fallback) {
 
 app.get("/api/weather", async (req, res) => {
   try {
-    const pt = pointFromQuery(req.query, WEATHER_POINT);
-    const data = await cached(`weather:${pt.latitude},${pt.longitude}`, CACHE_TTL.weather, () => fetchWeather(pt));
+    const { weather_point, cache_ttl } = await store.getSettings();
+    const pt = pointFromQuery(req.query, weather_point);
+    const data = await cached(`weather:${pt.latitude},${pt.longitude}`, cache_ttl.weather, () => fetchWeather(pt));
     res.json({ fetchedAt: new Date().toISOString(), ...data, name: pt.name });
   } catch (e) {
     res.status(502).json({ error: e.message });
@@ -193,8 +194,9 @@ app.get("/api/weather", async (req, res) => {
 
 app.get("/api/air/point", async (req, res) => {
   try {
-    const pt = pointFromQuery(req.query, WEATHER_POINT);
-    const data = await cached(`air:${pt.latitude},${pt.longitude}`, CACHE_TTL.air, () => fetchAir(pt));
+    const { weather_point, cache_ttl } = await store.getSettings();
+    const pt = pointFromQuery(req.query, weather_point);
+    const data = await cached(`air:${pt.latitude},${pt.longitude}`, cache_ttl.air, () => fetchAir(pt));
     res.json({ fetchedAt: new Date().toISOString(), ...data, name: pt.name });
   } catch (e) {
     res.status(502).json({ error: e.message });
@@ -300,7 +302,8 @@ app.get("/api/billboards/:id/speed", async (req, res) => {
   try {
     const { id } = req.params;
     if (!ID_RE.test(id)) return res.status(400).json({ error: "bad id" });
-    const data = await cached(`speed:${id}`, CACHE_TTL.traffic, async () => {
+    const { cache_ttl } = await store.getSettings();
+    const data = await cached(`speed:${id}`, cache_ttl.traffic, async () => {
       const geo = await loadBillboards();
       const f = findFeature(geo, id);
       if (!f) throw Object.assign(new Error("unknown billboard"), { status: 404 });
@@ -602,8 +605,9 @@ app.get("/api/places/:placeId", async (req, res) => {
 // Chennai Metro Blue Line: track + stations from OpenStreetMap (ODbL).
 app.get("/api/metro/blue", async (_req, res) => {
   try {
-    const txt = await readFile(path.join(ROOT, "data", "metro-blue-line.geojson"), "utf8");
-    res.type("application/geo+json").send(txt);
+    const geo = await store.getLayer("metro-blue-line");
+    if (!geo) return res.status(404).json({ error: "layer not found" });
+    res.type("application/geo+json").send(JSON.stringify(geo));
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
