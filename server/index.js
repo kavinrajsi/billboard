@@ -1,7 +1,8 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { readFile, writeFile, unlink, mkdir, copyFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
+import * as store from "./store.js";
 import { CORRIDORS, AIR_POINTS, WEATHER_POINT, CACHE_TTL } from "./config.js";
 import * as M from "../public/sv-math.js";
 
@@ -201,37 +202,28 @@ app.get("/api/air/point", async (req, res) => {
 });
 
 // Own billboard dataset (GeoJSON). Not derived from Google content.
-const BILLBOARDS_FILE = path.join(ROOT, "data", "billboards.geojson");
-const CREATIVES_DIR = path.join(ROOT, "data", "creatives");
 
 app.get("/api/billboards", async (_req, res) => {
   try {
-    const txt = await readFile(BILLBOARDS_FILE, "utf8");
-    res.type("application/geo+json").send(txt);
+    res.set("Cache-Control", "no-store").type("application/geo+json").send(JSON.stringify(await store.loadBillboards(), null, 2));
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
-// Creative images for billboards: stored locally under data/creatives, URL saved on the feature.
+// Creative images for billboards: stored in Neon (or data/creatives locally), URL saved on the feature.
 const IMAGE_EXT = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif" };
 const ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
 
-async function loadBillboards() {
-  return JSON.parse(await readFile(BILLBOARDS_FILE, "utf8"));
-}
-async function saveBillboards(geo) {
-  // keep the previous version next to the file so an accidental edit can be undone by hand
-  await copyFile(BILLBOARDS_FILE, `${BILLBOARDS_FILE}.bak`).catch(() => {});
-  await writeFile(BILLBOARDS_FILE, JSON.stringify(geo, null, 2) + "\n");
-}
+const loadBillboards = store.loadBillboards;
+const saveBillboards = store.saveBillboards;
 function findFeature(geo, id) {
   return geo.features.find((f) => f.properties?.id === id);
 }
 async function removeCreativeFile(url) {
   if (!url) return;
   const name = path.basename(url.split("?")[0]);
-  await unlink(path.join(CREATIVES_DIR, name)).catch(() => {});
+  await store.deleteCreative(name);
 }
 
 app.put(
@@ -247,10 +239,9 @@ app.put(
       const geo = await loadBillboards();
       const f = findFeature(geo, id);
       if (!f) return res.status(404).json({ error: "unknown billboard" });
-      await mkdir(CREATIVES_DIR, { recursive: true });
       await removeCreativeFile(f.properties.creative_url);
       const name = `${id}.${ext}`;
-      await writeFile(path.join(CREATIVES_DIR, name), req.body);
+      await store.putCreative(name, req.get("content-type").split(";")[0], req.body);
       f.properties.creative_url = `/creatives/${name}?v=${Date.now()}`;
       await saveBillboards(geo);
       res.json({ id, creative_url: f.properties.creative_url });
@@ -543,7 +534,16 @@ app.delete("/api/billboards/:id/creative", async (req, res) => {
   }
 });
 
-app.use("/creatives", express.static(CREATIVES_DIR, { maxAge: "1y", immutable: true }));
+app.get("/creatives/:name", async (req, res) => {
+  try {
+    if (!/^[A-Za-z0-9_-]{1,64}\.(png|jpg|webp|gif)$/.test(req.params.name)) return res.status(404).end();
+    const c = await store.getCreative(req.params.name);
+    if (!c) return res.status(404).end();
+    res.set("Cache-Control", "public, max-age=31536000, immutable").type(c.type).send(c.buf);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 // Place search (Places API New) proxied so the server key stays private.
 const CHENNAI = { latitude: 13.0827, longitude: 80.2707 };

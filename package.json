@@ -8,8 +8,11 @@
     "start": "node --env-file-if-exists=.env.local server/index.js",
     "dev": "node --watch --env-file-if-exists=.env.local server/index.js"
   },
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "express": "^4.21.2"
   }
 }

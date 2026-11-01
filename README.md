@@ -20,7 +20,7 @@ browser (CesiumJS + Street View)         Express server (Node)
   ├─ 3D Tiles ........ browser key         ├─ holds the server key, never sent to the browser
   ├─ polls /api/* ──────────────────────▶  ├─ calls Google Routes / Air Quality / Weather / Places
   └─ billboards, creatives, metro line     ├─ short in-memory cache (see CACHE_TTL)
-                                           └─ reads and writes data/billboards.geojson
+                                           └─ reads and writes billboards + creatives in Neon Postgres
 ```
 
 ## Quick start
@@ -56,6 +56,7 @@ Set in `.env.local` (git-ignored, never commit it).
 | `GOOGLE_SERVER_KEY` | yes | Traffic, air, weather, places (server only) |
 | `ANTHROPIC_API_KEY` | no | Enables "Auto-align (AI)" in the panel |
 | `AUTO_ALIGN_MODEL` | no | Override the AI model (default `claude-opus-5-5`) |
+| `DATABASE_URL` | recommended | Neon Postgres connection string. Billboards and creatives are stored there. Without it, the app uses the files in `data/` (read-only on Vercel) |
 | `PORT` | no | Server port (default `3000`) |
 
 ## Using the app
@@ -85,13 +86,14 @@ An open viewer tab reloads the data as soon as the panel saves.
 | Path | Purpose |
 |------|---------|
 | `server/index.js` | Express app: API routes, uploads, static files |
+| `server/store.js` | Storage layer: Neon Postgres, or files in `data/` when `DATABASE_URL` is unset |
 | `server/config.js` | Traffic corridors, air-quality points, weather point, cache TTLs |
 | `public/index.html`, `app.js`, `style.css` | Viewer |
 | `public/admin.html`, `admin.js`, `admin.css` | Billboard panel |
 | `public/sv-math.js` | Street View geometry: camera model, projection, alignment fits |
-| `data/billboards.geojson` | Billboard survey data (sample included) |
+| `data/billboards.geojson` | Seed data. Copied into Neon the first time the database is empty |
 | `data/metro-blue-line.geojson` | Metro Blue Line route |
-| `data/creatives/` | Uploaded creative images, served at `/creatives/` |
+| `data/creatives/` | Seed creative images (then stored in Neon, served at `/creatives/`) |
 
 ## API routes
 
@@ -112,6 +114,17 @@ An open viewer tab reloads the data as soon as the panel saves.
 | `DELETE /api/billboards/:id/creative` | Remove the creative |
 | `PUT /api/billboards/:id/streetview` | Save a panorama alignment |
 | `POST /api/billboards/:id/auto-align` | AI suggestion for the four corners |
+
+## Database
+
+Tables are created automatically on first request:
+
+| Table | Holds |
+|-------|-------|
+| `billboards` | One row per board: `id`, `position`, `feature` (the GeoJSON feature as JSONB) |
+| `creatives` | Creative images as base64: `name`, `content_type`, `data_b64` |
+
+The first run seeds both tables from `data/`. After that the database is the source of truth, so panel saves persist on Vercel.
 
 > The write routes (`PUT`, `POST`, `DELETE`) have **no login**. Run the panel locally
 > or put the server behind authentication before exposing it on the internet.
