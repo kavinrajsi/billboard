@@ -611,6 +611,11 @@ app.get("/api/metro/blue", async (_req, res) => {
 
 app.use(express.static(path.join(ROOT, "public")));
 
-app.listen(PORT, () => {
-  console.log(`Chennai 3D live → http://localhost:${PORT}`);
-});
+// On Vercel the app is served by api/index.js; only listen when run directly.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Chennai 3D live → http://localhost:${PORT}`);
+  });
+}
+
+export default app;

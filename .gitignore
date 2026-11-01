@@ -8,3 +8,5 @@ data/billboards.geojson.bak
 !.env.example
 *.pem
 *.key
+.vercel
+.env*

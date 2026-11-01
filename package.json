@@ -5,8 +5,8 @@
   "type": "module",
   "description": "Live 3D model of Chennai on Google Photorealistic 3D Tiles (CesiumJS) with live data overlays and a height-measuring tool.",
   "scripts": {
-    "start": "node --env-file-if-exists=.env server/index.js",
-    "dev": "node --watch --env-file-if-exists=.env server/index.js"
+    "start": "node --env-file-if-exists=.env.local server/index.js",
+    "dev": "node --watch --env-file-if-exists=.env.local server/index.js"
   },
   "engines": { "node": ">=22" },
   "dependencies": {
